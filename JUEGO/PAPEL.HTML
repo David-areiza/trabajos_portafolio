@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piedra, Papel o Tijeras</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8b8b1;
+            /* Rosa pastel */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #game-container {
+            background-color: #f5f5dc;
+            /* Beige pastel */
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        #result {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .choice-btn {
+            font-size: 16px;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+        }
+
+        #piedra-btn {
+            background-color: #ffd700;
+            /* Amarillo */
+        }
+
+        #papel-btn {
+            background-color: #ecec0e;
+            /* Blanco pastel */
+        }
+
+        #tijeras-btn {
+            background-color: #add8e6;
+            /* Azul claro */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="game-container">
+        <h1>Piedra, Papel o Tijeras</h1>
+        <p>Elige una opción:</p>
+        <button id="piedra-btn" class="choice-btn" onclick="playGame('piedra')">Piedra</button>
+        <button id="papel-btn" class="choice-btn" onclick="playGame('papel')">Papel</button>
+        <button id="tijeras-btn" class="choice-btn" onclick="playGame('tijeras')">Tijeras</button>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        function playGame(userChoice) {
+            const choices = ['piedra', 'papel', 'tijeras'];
+            const computerChoice = choices[Math.floor(Math.random() * choices.length)];
+
+            const result = determineWinner(userChoice, computerChoice);
+
+            document.getElementById('result').innerText = `Elegiste ${userChoice}. La IA eligió ${computerChoice}. ${result}`;
+        }
+
+        function determineWinner(userChoice, computerChoice) {
+            if (userChoice === computerChoice) {
+                return "Es un empate.";
+            } else if ((userChoice === 'piedra' && computerChoice === 'tijeras') ||
+                (userChoice === 'papel' && computerChoice === 'piedra') ||
+                (userChoice === 'tijeras' && computerChoice === 'papel')) {
+                return "¡Ganaste!";
+            } else {
+                return "¡Perdiste! Intenta de nuevo.";
+            }
+        }
+    </script>
+</body>
+
+</html>

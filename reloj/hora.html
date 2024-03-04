@@ -1,0 +1,101 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reloj Mundial</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #8cc9dd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #world-clock {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgb(1, 154, 255);
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        #clocks {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .clock {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin: 0 10px;
+        }
+
+        #medellin-clock {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin: 0 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="world-clock">
+        <h1>Reloj Mundial</h1>
+        <div id="clocks">
+            <div class="clock" id="utc-clock">
+                <h2>UTC</h2>
+                <p id="utc-time"></p>
+            </div>
+            <div class="clock" id="new-york-clock">
+                <h2>Nueva York</h2>
+                <p id="new-york-time"></p>
+            </div>
+            <div class="clock" id="tokyo-clock">
+                <h2>Tokio</h2>
+                <p id="tokyo-time"></p>
+            </div>
+        </div>
+        <div id="clocks">
+            <div id="medellin-clock">
+                <h2>Medellín</h2>
+                <p id="medellin-time"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateClocks() {
+            const utcElement = document.getElementById('utc-time');
+            const newYorkElement = document.getElementById('new-york-time');
+            const tokyoElement = document.getElementById('tokyo-time');
+            const medellinElement = document.getElementById('medellin-time');
+
+            const utcTime = new Date().toUTCString();
+            const newYorkTime = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' });
+            const tokyoTime = new Date().toLocaleString('en-US', { timeZone: 'Asia/Tokyo' });
+            const medellinTime = new Date().toLocaleString('en-US', { timeZone: 'America/Bogota' });
+
+            utcElement.textContent = utcTime;
+            newYorkElement.textContent = newYorkTime;
+            tokyoElement.textContent = tokyoTime;
+            medellinElement.textContent = medellinTime;
+        }
+
+        setInterval(updateClocks, 1000);
+        updateClocks(); // Actualizar inmediatamente al cargar la página
+    </script>
+</body>
+
+</html>

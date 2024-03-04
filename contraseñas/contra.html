@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Contraseñas</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #e6e6fa; /* Morado claro */
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        #password-container {
+            background-color: #f0f8ff; /* Azul claro */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            width: 400px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        label {
+            margin-bottom: 10px;
+            display: block;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            text-transform: uppercase;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #password {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="password-container">
+        <h1>Generador de Contraseñas</h1>
+        <label for="length">Longitud de la contraseña:</label>
+        <input type="number" id="length" min="6" value="12">
+        <br>
+        <label>Tipo de caracteres:</label>
+        <input type="checkbox" id="uppercase" checked> <label for="uppercase">Mayúsculas</label>
+        <input type="checkbox" id="lowercase" checked> <label for="lowercase">Minúsculas</label>
+        <input type="checkbox" id="numbers" checked> <label for="numbers">Números</label>
+        <input type="checkbox" id="symbols" checked> <label for="symbols">Símbolos</label></label>
+        <br>
+        <button onclick="generatePassword()">Generar Contraseña</button>
+        <div id="password"></div>
+    </div>
+
+    <script>
+        function generatePassword() {
+            const length = document.getElementById('length').value;
+            const uppercase = document.getElementById('uppercase').checked;
+            const lowercase = document.getElementById('lowercase').checked;
+            const numbers = document.getElementById('numbers').checked;
+            const symbols = document.getElementById('symbols').checked;
+
+            const uppercaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            const lowercaseChars = 'abcdefghijklmnopqrstuvwxyz';
+            const numberChars = '0123456789';
+            const symbolChars = '!@#$%^&*()_-+=<>?/';
+
+            let validChars = '';
+            let password = '';
+
+            if (uppercase) validChars += uppercaseChars;
+            if (lowercase) validChars += lowercaseChars;
+            if (numbers) validChars += numberChars;
+            if (symbols) validChars += symbolChars;
+
+            if (validChars === '') {
+                alert('Debes seleccionar al menos un tipo de carácter.');
+                return;
+            }
+
+            for (let i = 0; i < length; i++) {
+                const randomIndex = Math.floor(Math.random() * validChars.length);
+                password += validChars[randomIndex];
+            }
+
+            document.getElementById('password').textContent = 'Contraseña generada: ' + password;
+        }
+    </script>
+</body>
+
+</html>
